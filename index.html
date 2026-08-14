@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Título da Aba do Navegador -->
+    <title>Espaço SingularMente | Psicologia e Neuropsicologia</title>
+
+    <!-- Fontes Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+    <!-- Ícones (Phosphor Icons - Premium/Modernos) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* ==========================================================================
+            VARIÁVEIS DE CORES E ESTILOS GERAIS
+            ========================================================================== */
+        :root {
+            --primary: #2C4A52;        
+            --secondary: #6B5B4C;      
+            --accent: #F2E3D5;          
+            --bg-light: #BB9469;      
+            --bg-white: #FAF6F0;      
+            --text-dark: #2A2A2A;      
+            --text-light: #4A4A4A;     
+            --font-heading: 'Lora', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            --shadow-soft: 0 10px 30px rgba(44, 74, 82, 0.1);
+            --shadow-hover: 0 15px 40px rgba(44, 74, 82, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden; 
+        }
+
+        body {
+            font-family: var(--font-body);
+            /* Fundo animado com a cor #BB9469 e variações suaves */
+            background: linear-gradient(135deg, #BB9469, #A67C52, #C8A278, #BB9469);
+            background-size: 300% 300%;
+            animation: bgAnimation 15s ease infinite;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Animação suave do fundo */
+        @keyframes bgAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+
+        p {
+            color: var(--text-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            font-size: 1.1rem;
+        }
+
+        /* ==========================================================================
+            TELA DE ABERTURA (SPLASH SCREEN)
+            ========================================================================== */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #BB9469;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            padding: 2rem;
+        }
+
+        .splash-content {
+            text-align: center;
+            animation: splashFadeIn 1.5s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .splash-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        #splash-screen h1 {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        #splash-screen p {
+            font-family: var(--font-heading);
+            font-style: italic;
+            color: #F2E3D5;
+        }
+
+        @keyframes splashFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==========================================================================
+            CABEÇALHO E NAVEGAÇÃO
+            ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(187, 148, 105, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        /* ==========================================================================
+            BOTÕES E ELEMENTOS DE INTERAÇÃO
+            ========================================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--bg-white);
+            box-shadow: 0 4px 15px rgba(44, 74, 82, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #1f343a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44, 74, 82, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: var(--bg-white);
+            transform: translateY(-3px);
+        }
+
+        /* ==========================================================================
+            HERO SECTION
+            ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Adicionado para layout lado a lado */
+            gap: 3rem; /* Adicionado para separar imagem e texto */
+            position: relative;
+            overflow: hidden;
+            padding-top: 6rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            z-index: 1;
+            max-width: 450px;
+        }
+
+        .hero-logo-3d {
+            width: 100%;
+            height: auto;
+            /* Efeito 3D com sombra projetada (drop-shadow) */
+            filter: drop-shadow(-15px 20px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.3));
+            /* Animação de rotação contínua */
+            animation: rotate3DLogo 12s linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes rotate3DLogo {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            flex: 1; /* Adicionado para balancear flexibilidade com a imagem */
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #2C4A52;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            color: #3A3A3A;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* ==========================================================================
+            DIFERENÇA E CARDS GERAIS
+            ========================================================================== */
+        .difference-section {
+            background-color: rgba(250, 246, 240, 0.85);
+            backdrop-filter: blur(5px);
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: stretch;
+        }
+
+        .diff-card {
+            padding: 3rem;
+            border-radius: 16px;
+            background: var(--bg-white);
+            border-top: 4px solid var(--primary);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .diff-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .diff-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .diff-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-white);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: var(--transition);
+            transform-origin: left;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* ==========================================================================
+            FAIXA ETÁRIA
+            ========================================================================== */
+        .age-groups {
+            background-color: var(--primary);
+            color: var(--bg-white);
+        }
+
+        .age-groups .section-title, .age-groups .section-subtitle, .age-groups p {
+            color: var(--bg-white);
+        }
+
+        .age-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .age-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .age-card i {
+            font-size: 3rem;
+            color: #F2E3D5;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ==========================================================================
+            COMO FUNCIONA (TIMELINE)
+            ========================================================================== */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 22%;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-white);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0 auto 1.5rem auto;
+            box-shadow: 0 0 0 10px rgba(187, 148, 105, 0.4);
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .step:hover .step-number {
+            background: var(--primary);
+            color: var(--bg-white);
+            transform: scale(1.05);
+        }
+
+        /* ==========================================================================
+            SOBRE / PROFISSIONAIS
+            ========================================================================== */
+        .about-section {
+            background-color: rgba(250, 246, 240, 0.85);
+            backdrop-filter: blur(5px);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .team-photo {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .team-info {
+            padding: 2rem;
+        }
+
+        .team-title {
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .crp {
+            font-size: 0.8rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* ==========================================================================
+            CONTATO E LOCALIZAÇÃO
+            ========================================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .contact-info-card {
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            word-break: break-word;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .map-container {
+            width: 100%;
+            min-height: 400px;
+            border-radius: 16px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* ==========================================================================
+            FAQ (ACORDEÃO)
+            ========================================================================== */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-white);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: var(--bg-white);
+        }
+
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        /* ==========================================================================
+            RODAPÉ
+            ========================================================================== */
+        footer {
+            background: var(--primary);
+            color: var(--bg-white);
+            padding: 4rem 2rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #F2E3D5;
+        }
+
+        .footer-disclaimer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* ==========================================================================
+            BOTÃO FLUTUANTE WHATSAPP
+            ========================================================================== */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        /* ==========================================================================
+            ANIMAÇÕES DE SCROLL
+            ========================================================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+            RESPONSIVIDADE (MOBILE E TABLET)
+            ========================================================================== */
+        @media (max-width: 992px) {
+            .diff-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .age-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #FAF6F0;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                z-index: 999;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links a {
+                padding: 1rem 2rem;
+                display: block;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 7rem;
+                text-align: center;
+                flex-direction: column; /* Alinhamento vertical em telas menores */
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+            }
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .timeline {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 20px;
+                gap: 2rem;
+            }
+            .timeline::before {
+                top: 0;
+                left: 55px;
+                width: 2px;
+                height: 100%;
+            }
+            .step {
+                width: 100%;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .step-number {
+                margin: 0 0 1rem 0;
+                width: 70px;
+                height: 70px;
+                font-size: 1.3rem;
+            }
+
+            .contact-info-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .diff-card, .age-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.1rem;
+            }
+            .timeline::before {
+                left: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TELA DE ABERTURA -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <i class="ph-light ph-brain splash-icon"></i>
+            <h1>Espaço SingularMente</h1>
+            <p>Acolhimento, cuidado e transformação.</p>
+        </div>
+    </div>
+
+    <!-- CABEÇALHO / MENU FIXO -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">
+                <i class="ph-fill ph-leaf"></i>
+                Espaço SingularMente
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#diferenca">Abordagens</a></li>
+                <li><a href="#psicologia">Psicologia</a></li>
+                <li><a href="#neuropsicologia">Neuropsicologia</a></li>
+                <li><a href="#publico">Para quem é</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#profissionais">Profissionais</a></li>
+                <li><a href="#faq">Dúvidas</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+
+            <div class="hamburger" aria-label="Abrir menu" role="button" tabindex="0">
+                <i class="ph ph-list"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- SEÇÃO HERO -->
+    <section id="inicio" class="hero container">
+
+        <!-- LOGO 3D ADICIONADA -->
+        <div class="hero-logo-container reveal">
+            <img src="logorealistasemfundo.png" alt="Logotipo Espaço SingularMente" class="hero-logo-3d">
+        </div>
+
+        <div class="hero-content reveal">
+            <h1>Espaço SingularMente. <br><br> Elegante entre a ideia de ser único e a atenção à mente.<br><br> Dra. Madalena Tenório.<br><br>
+                        <br></p>
+
+            <div class="hero-buttons">
+                <a href="https://wa.me/5581992410181?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20atendimento." class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-calendar-plus"></i> Agendar atendimento
+                </a>
+                <a href="#diferenca" class="btn btn-secondary">
+                    Conheça nossos serviços
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENÇA: PSICOLOGIA VS NEUROPSICOLOGIA -->
+    <section id="diferenca" class="difference-section">
+        <div class="container reveal">
+            <h2 class="section-title">Nossas Abordagens</h2>
+            <p class="section-subtitle">Entenda a diferença entre nossas especialidades e como cada uma pode auxiliar no seu processo de autoconhecimento e saúde mental.</p>
+
+            <div class="diff-grid">
+                <div class="diff-card">
+                    <i class="ph-light ph-chats-teardrop"></i>
+                    <h3>Psicologia Clínica</h3>
+                    <p>Focada no acolhimento emocional, autoconhecimento e resolução de conflitos. A psicoterapia oferece um espaço seguro para falar sobre sentimentos, tratar transtornos (como ansiedade e depressão), melhorar relacionamentos e enfrentar momentos difíceis da vida.</p>
+                </div>
+
+                <div class="diff-card">
+                    <i class="ph-light ph-brain"></i>
+                    <h3>Neuropsicologia</h3>
+                    <p>Focada na investigação do funcionamento cerebral. Através de testes padronizados, avalia funções como memória, atenção, raciocínio e linguagem. É fundamental para diagnósticos precisos (como TDAH, Autismo, perdas cognitivas) e planejamento de reabilitação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PSICOLOGIA -->
+    <section id="psicologia" class="container reveal">
+        <h2 class="section-title">Atendimento Psicológico</h2>
+        <p class="section-subtitle">Um acompanhamento focado no desenvolvimento humano, alívio do sofrimento emocional e fortalecimento pessoal.</p>
+
+        <div class="grid-cards">
+            <div class="card"><i class="ph ph-wind"></i><h4>Ansiedade</h4><p>Manejo de crises e regulação emocional.</p></div>
+            <div class="card"><i class="ph ph-battery-warning"></i><h4>Estresse</h4><p>Prevenção de burnout e sobrecarga.</p></div>
+            <div class="card"><i class="ph ph-magnifying-glass-plus"></i><h4>Autoconhecimento</h4><p>Compreensão profunda de si mesmo.</p></div>
+            <div class="card"><i class="ph ph-users-three"></i><h4>Relacionamentos</h4><p>Comunicação e vínculos saudáveis.</p></div>
+            <div class="card"><i class="ph ph-student"></i><h4>Dificuldades Escolares</h4><p>Apoio na aprendizagem e socialização.</p></div>
+            <div class="card"><i class="ph ph-arrows-merge"></i><h4>Mudanças de Vida</h4><p>Apoio em transições e lutos.</p></div>
+            <div class="card"><i class="ph ph-plant"></i><h4>Desenvolvimento</h4><p>Crescimento pessoal e profissional.</p></div>
+            <div class="card"><i class="ph ph-heart-half"></i><h4>Regulação Emocional</h4><p>Equilíbrio das emoções diárias.</p></div>
+        </div>
+    </section>
+
+    <!-- NEUROPSICOLOGIA -->
+    <section id="neuropsicologia" class="difference-section">
+        <div class="container reveal">
+            <h2 class="section-title">Avaliação Neuropsicológica</h2>
+            <p class="section-subtitle">A avaliação neuropsicológica investiga diferentes aspectos do funcionamento cognitivo, emocional e comportamental.</p>
+
+            <div class="grid-cards">
+                <div class="card"><i class="ph ph-target"></i><h4>Atenção</h4><p>Foco, concentração e controle de impulsos.</p></div>
+                <div class="card"><i class="ph ph-floppy-disk"></i><h4>Memória</h4><p>Retenção e resgate de informações.</p></div>
+                <div class="card"><i class="ph ph-chat-centered-text"></i><h4>Linguagem</h4><p>Compreensão e expressão verbal.</p></div>
+                <div class="card"><i class="ph ph-kanban"></i><h4>Funções Executivas</h4><p>Planejamento e organização.</p></div>
+                <div class="card"><i class="ph ph-puzzle-piece"></i><h4>Raciocínio</h4><p>Resolução de problemas e lógica.</p></div>
+                <div class="card"><i class="ph ph-book-open"></i><h4>Aprendizagem</h4><p>Aquisição de novas habilidades.</p></div>
+                <div class="card"><i class="ph ph-trend-up"></i><h4>Cognição</h4><p>Desenvolvimento do intelecto global.</p></div>
+                <div class="card"><i class="ph ph-mask-happy"></i><h4>Comportamento</h4><p>Aspectos emocionais e reações sociais.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAIXA ETÁRIA -->
+    <section id="publico" class="age-groups reveal">
+        <div class="container">
+            <h2 class="section-title">Atendimento personalizado</h2>
+            <p class="section-subtitle">Abordagens adaptadas às necessidades específicas de cada momento do desenvolvimento humano.</p>
+
+            <div class="age-grid">
+                <div class="age-card">
+                    <i class="ph-light ph-baby"></i>
+                    <h3>Crianças</h3>
+                    <p style="margin-top: 1rem;">Acompanhamento lúdico voltado ao desenvolvimento emocional, comportamental, cognitivo e aprendizagem escolar.</p>
+                </div>
+
+                <div class="age-card">
+                    <i class="ph-light ph-backpack"></i>
+                    <h3>Adolescentes</h3>
+                    <p style="margin-top: 1rem;">Espaço seguro e livre de julgamentos para trabalhar questões emocionais, conflitos e escolhas profissionais.</p>
+                </div>
+
+                <div class="age-card">
+                    <i class="ph-light ph-briefcase"></i>
+                    <h3>Adultos</h3>
+                    <p style="margin-top: 1rem;">Atendimento voltado ao autoconhecimento, saúde emocional, relacionamentos, carreira e transições da vida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="container reveal">
+        <h2 class="section-title">Como funciona?</h2>
+        <p class="section-subtitle">Um processo transparente, ético e focado exclusivamente no seu bem-estar.</p>
+
+        <div class="timeline">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h4>Primeiro contato</h4>
+                <p>Agendamento via WhatsApp, onde tiramos dúvidas e encontramos o melhor horário.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h4>Conversa inicial</h4>
+                <p>Primeira sessão para acolhimento da demanda e conhecimento mútuo.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h4>Avaliação</h4>
+                <p>Período de investigação clínica e entendimento profundo do seu contexto.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">04</div>
+                <h4>Plano Terapêutico</h4>
+                <p>Acompanhamento estruturado, individualizado e focado em metas de saúde.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE E PROFISSIONAIS -->
+    <section id="sobre" class="about-section reveal">
+        <div class="container">
+            <h2 class="section-title">Um espaço pensado para acolher você</h2>
+            <p class="section-subtitle">Nosso consultório foi planejado para oferecer um ambiente seguro, privativo e acolhedor. Prezamos pela ética, pelo sigilo profissional e pelo atendimento humanizado.</p>
+
+            <div id="profissionais" class="team-grid mt-5">
+                <div class="team-card">
+                    <img src="foto.jpg" alt="Foto Profissional" class="team-photo">
+                    <div class="team-info">
+                        <h3>Dra. Maria Madalena Tenório</h3>
+                        <span class="team-title">Psicóloga Clínica e Neuropsicóloga</span>
+                        <span class="crp">CRP 02/20127</span>
+                        <p>Especialista em Avaliação e Reabilitação Neuropsicológica e Intervenção Comportamental (Sessões ABA) como também em Terapia Cognitivo-Comportamental. Atua com foco no desenvolvimento infantojuvenil e adultos.</p>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <img src="logorealista2.1.jpg" alt="Foto Profissional" class="team-photo">
+                    <div class="team-info">
+                        <h3  </h3>
+                        <span class="team-title"></span>
+                        <span class="crp">Você em primeiro lugar!</span>
+                        <p>Olhar pra dentro é o primeiro passo para a transformação.<br> Aprofundando o autoconhecimento e ressigmificando histórias através da terapia. <br><br>Venha fazer sua primeira consulta e sinta-se acolhido nesse "Epaço SingularMente"</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO E LOCALIZAÇÃO -->
+    <section id="contato" class="container reveal">
+        <h2 class="section-title">Agende sua consulta</h2>
+        <p class="section-subtitle">Estamos prontos para receber você. Entre em contato pelos nossos canais de atendimento ou venha nos visitar.</p>
+
+        <div class="contact-grid">
+            <div class="contact-info-card">
+                <h3>Informações de Contato</h3>
+                <br>
+
+                <div class="contact-item">
+                    <i class="ph-fill ph-whatsapp-logo"></i>
+                    <div>
+                        <strong>WhatsApp / Telefone</strong>
+                        <p>(81) 99241-0181</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="ph-fill ph-envelope"></i>
+                    <div>
+                        <strong>E-mail</strong>
+                        <p>psimadalenatenorio@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="ph-fill ph-instagram-logo"></i>
+                    <div>
+                        <strong>Instagram</strong>
+                        <p>https://www.instagram.com/psicologa_madalena_tenorio?igsh=MXFmcmQzaHBibTd5eg%3D%3D</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="ph-fill ph-map-pin"></i>
+                    <div>
+                        <strong>Endereço</strong>
+                        <p>RuaRua Coronel Dário Ferraz de Sá, 3568. Sala 229 - 01 andar. Multi Shopping Sul, Barra de Jangada, Jaboatão dos Guararapes - PE</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="ph-fill ph-clock"></i>
+                    <div>
+                        <strong>Horário de Atendimento</strong>
+                        <p>Segunda a Sexta: 08h às 18h<br>Sábados: 08h às 12h</p>
+                    </div>
+                </div>
+
+                <br>
+                <a href="https://wa.me/5581992410181?text=Ol%C3%A1!%20Gostaria%20de%20obter%20informa%C3%A7%C3%B5es%20sobre%20o%20atendimento%20psicol%C3%B3gico/neuropsicol%C3%B3gico." class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    Agendar pelo WhatsApp
+                </a>
+            </div>
+
+            <div class="map-container">
+                <div style="color: white;">
+                    <i class="ph-light ph-map-trifold" style="font-size: 4rem; margin-bottom: 1rem; color: white;"></i>
+                    <h3 style="color: white; margin-bottom: 1rem;">Rua Coronel Dário Ferraz de Sá, 3568. Sala 229 - 01 andar. Multi Shopping Sul, Barra de Jangada, Jaboatão dos Guararapes - PE</h3>
+                    <a href="https://maps.google.com/maps?q=Rua+Coronel+Dário+Ferraz+de+Sá+3568,+Barra+de+Jangada+-+Jaboatão+dos+Guararapes+-+PE" target="_blank" class="btn btn-secondary" style="border-color: white; color: white;">Ver no mapa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="about-section reveal">
+        <div class="container faq-container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <p class="section-subtitle">Esclareça suas principais dúvidas sobre o funcionamento do consultório.</p>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        O consultório atende crianças e adolescentes?
+                        <i class="ph ph-caret-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! Temos profissionais especializados no atendimento infantil (a partir de 3 anos) e atendimento focado nas demandas da adolescência.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Como funciona a avaliação neuropsicológica?
+                        <i class="ph ph-caret-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>É um processo estruturado que dura em média de 6 a 8 sessões. Envolve entrevistas, aplicação de testes padronizados e a entrega de um laudo completo.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Quanto tempo dura uma sessão?
+                        <i class="ph ph-caret-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>As sessões de psicoterapia duram tradicionalmente 50 minutos e costumam ocorrer com frequência semanal.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Existe atendimento online?
+                        <i class="ph ph-caret-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim. Oferecemos psicoterapia online para adolescentes e adultos. A avaliação neuropsicológica, no entanto, exige etapas presenciais.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Como faço para agendar?
+                        <i class="ph ph-caret-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O agendamento é feito de forma rápida e segura através do nosso WhatsApp. Nossa equipe apresentará os horários disponíveis e valores.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="ph-fill ph-leaf"></i>
+                Espaço Mente
+            </div>
+            <p>Psicologia e Neuropsicologia Especializada</p>
+            <p style="margin-bottom: 2rem; font-size: 0.9rem;">Atendimento para crianças, adolescentes e adultos</p>
+
+            <p>Endereço:Rua Coronel Dário Ferraz de Sá 3568,  Barra de Jangada - Jaboatão dos Guararapes - PE (Multi Shopping Sul)</p>
+            <p>WhatsApp: (81) 99241-0181</p>
+            <p>E-mail: psimadalenatenorio@gmail.com</p>
+
+            <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1.5rem; font-size: 1.8rem;">
+                <a href="#" aria-label="Instagram"><i class="ph-fill ph-instagram-logo"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="ph-fill ph-whatsapp-logo"></i></a>
+            </div>
+
+            <div class="footer-disclaimer">
+                <p>Este site possui finalidade exclusivamente informativa. O conteúdo apresentado não substitui avaliação, diagnóstico ou acompanhamento profissional de um Psicólogo ou Médico.</p>
+                <p style="margin-top: 1rem;">&copy; Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
+    <a href="https://wa.me/5581992410181?text=Ol%C3%A1!%20Estou%20no%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es." class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+    </a>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Splash Screen Logic
+            const splash = document.getElementById('splash-screen');
+            setTimeout(() => {
+                splash.style.opacity = '0';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                }, 800);
+            }, 2000);
+
+            // 2. Menu Hambúrguer Responsivo
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const navItems = document.querySelectorAll('.nav-links a');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    hamburger.innerHTML = '<i class="ph ph-x"></i>';
+                } else {
+                    hamburger.innerHTML = '<i class="ph ph-list"></i>';
+                }
+            });
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.innerHTML = '<i class="ph ph-list"></i>';
+                });
+            });
+
+            // 3. Scroll Animações
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+
+            // 4. Lógica do FAQ (Acordeão)
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    const answer = question.nextElementSibling;
+                    const isActive = faqItem.classList.contains('active');
+
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                        item.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                        question.setAttribute('aria-expanded', 'true');
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
